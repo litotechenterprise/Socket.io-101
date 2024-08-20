@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io("http://localhost:8000");
+      socket.on("connect", () => {
+        console.log(socket.id);
+      });
+
+      socket.on("messageFromServer", (data) => {
+        console.log("Recieved a message from the server");
+        console.log(data);
+      });
+
+      socket.emit("messageFromClient", {
+        data: "Hi server, It's great to (virtually) meet you!",
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Socket.IO Basic</h1>
+    <p>
+      Open the developer console to be able to use see the logs sent from the
+      server
+    </p>
+  </body>
+</html>
